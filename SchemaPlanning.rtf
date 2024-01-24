@@ -1,0 +1,110 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fmodern\fcharset0 Courier;\f2\fswiss\fcharset0 ArialMT;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red25\green25\blue25;\red237\green237\blue237;\red0\green0\blue0;
+\red0\green0\blue0;\red185\green122\blue229;\red124\green128\blue145;\red254\green193\blue89;\red121\green213\blue255;
+\red184\green230\blue123;\red112\green150\blue255;\red252\green56\blue93;\red243\green119\blue89;}
+{\*\expandedcolortbl;;\cssrgb\c12941\c12941\c12941;\cssrgb\c94510\c94510\c94510;\cssrgb\c0\c0\c0;
+\csgray\c0\c0;\cssrgb\c78039\c57255\c91765;\cssrgb\c56078\c57647\c63529;\cssrgb\c100000\c79608\c41961;\cssrgb\c53725\c86667\c100000;
+\cssrgb\c76471\c90980\c55294;\cssrgb\c50980\c66667\c100000;\cssrgb\c100000\c32549\c43922;\cssrgb\c96863\c54902\c42353;}
+\margl1440\margr1440\vieww20100\viewh18400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs28 \cf0 API SELECTION AND SCHEMA DESIGN:
+\fs24 \
+\
+\
+\
+API\'92S TO BE USED:\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b0\fs34 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 https://images-api.nasa.gov\
+https://api.le-systeme-solaire.net/en/\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 API\'92S TO BE USED:\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\b0 \cf4 \cb5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec6 class\strokec7  \strokec8 User\strokec9 (\strokec10 db\strokec9 .\strokec10 Model\strokec9 ):\strokec7 \
+\
+    __tablename__ \strokec6 =\strokec7  \strokec9 "\strokec10 users\strokec9 "\strokec7 \
+\
+    \strokec11 id\strokec7  \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  \strokec12 primary_key\strokec6 =\strokec13 True\strokec9 ,\strokec7  \strokec12 autoincrement\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    username \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 )\strokec7 \
+    image_url \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 ,\strokec7  \strokec12 default\strokec6 =\strokec9 "\strokec10 /static/images/defaultuser.jpg\strokec9 ")\strokec7 \
+    email \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 ,\strokec7  \strokec12 unique\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    home_planet \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  db\strokec9 .\strokec7 ForeignKey\strokec9 ('\strokec10 planets.id\strokec9 '))\strokec7 \
+    bio \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 )\strokec7 \
+    password \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 )\strokec7 \
+\
+\strokec6 class\strokec7  \strokec8 Planet\strokec9 (\strokec10 db\strokec9 .\strokec10 Model\strokec9 ):\strokec7 \
+\
+    __tablename__ \strokec6 =\strokec7  \strokec9 "\strokec10 planets\strokec9 "\strokec7 \
+\
+    \strokec11 id\strokec7  \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  \strokec12 primary_key\strokec6 =\strokec13 True\strokec9 ,\strokec7  \strokec12 autoincrement\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    name \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 ,\strokec7  \strokec12 unique\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    distance_from_sun \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Float\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 )\strokec7 \
+    activities_hosted \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  db\strokec9 .\strokec7 ForeignKey\strokec9 ('\strokec10 activities.id\strokec9 '))\strokec7 \
+    description \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 )\strokec7 \
+    gravity \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Float\strokec9 )\strokec7 \
+    image_url \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 )\strokec7 \
+\
+\strokec6 class\strokec7  \strokec8 Airport\strokec9 (\strokec10 db\strokec9 .\strokec10 Model\strokec9 ):\strokec7 \
+\
+    __tablename__ \strokec6 =\strokec7  \strokec9 "\strokec10 airports\strokec9 "\strokec7 \
+\
+    \strokec11 id\strokec7  \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  \strokec12 primary_key\strokec6 =\strokec13 True\strokec9 ,\strokec7  \strokec12 autoincrement\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    name \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 ,\strokec7  \strokec12 unique\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    planet \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  db\strokec9 .\strokec7 ForeignKey\strokec9 ('\strokec10 planets.id\strokec9 '))\strokec7 \
+\
+    db\strokec9 .\strokec7 relationship\strokec9 ('\strokec10 Planet\strokec9 ')\strokec7 \
+\
+\strokec6 class\strokec7  \strokec8 Flights\strokec9 (\strokec10 db\strokec9 .\strokec10 Model\strokec9 ):\strokec7 \
+\
+    __tablename__ \strokec6 =\strokec7  \strokec9 "\strokec10 flights\strokec9 "\strokec7 \
+\
+    \strokec11 id\strokec7  \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  \strokec12 primary_key\strokec6 =\strokec13 True\strokec9 ,\strokec7  \strokec12 autoincrement\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    departing_airport \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  db\strokec9 .\strokec7 ForeignKey\strokec9 ('\strokec10 airports.id\strokec9 '))\strokec7 \
+    arriving_airport \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  db\strokec9 .\strokec7 ForeignKey\strokec9 ('\strokec10 airports.id\strokec9 '))\strokec7 \
+    flight_time \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Float\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 )\strokec7 \
+\
+    db\strokec9 .\strokec7 relationship\strokec9 ('\strokec10 Airport\strokec9 ')\strokec7 \
+\
+\strokec6 class\strokec7  \strokec8 Activity\strokec9 (\strokec10 db\strokec9 .\strokec10 Model\strokec9 ):\strokec7 \
+\
+    __tablename__ \strokec6 =\strokec7  \strokec9 "\strokec10 activities\strokec9 "\strokec7 \
+\
+    \strokec11 id\strokec7  \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  \strokec12 primary_key\strokec6 =\strokec13 True\strokec9 ,\strokec7  \strokec12 autoincrement\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    name \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 ,\strokec7  \strokec12 unique\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    description \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 )\strokec7 \
+    planet \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  db\strokec9 .\strokec7 ForeignKey\strokec9 ('\strokec10 planets.id\strokec9 '))\strokec7 \
+\
+    db\strokec9 .\strokec7 relationship\strokec9 ('\strokec10 Planet\strokec9 ')\strokec7 \
+\
+\strokec6 class\strokec7  \strokec8 Hotel\strokec9 (\strokec10 db\strokec9 .\strokec10 Model\strokec9 ):\strokec7 \
+\
+    __tablename__ \strokec6 =\strokec7  \strokec9 "\strokec10 hotels\strokec9 "\strokec7 \
+\
+    \strokec11 id\strokec7  \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  \strokec12 primary_key\strokec6 =\strokec13 True\strokec9 ,\strokec7  \strokec12 autoincrement\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    name \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 ,\strokec7  \strokec12 unique\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    description \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 )\strokec7 \
+    planet \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  db\strokec9 .\strokec7 ForeignKey\strokec9 ('\strokec10 planets.id\strokec9 '))\strokec7 \
+    rating \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Float\strokec9 )\strokec7 \
+\
+    db\strokec9 .\strokec7 relationship\strokec9 ('\strokec10 Planet\strokec9 ')\strokec7 \
+\
+\strokec6 class\strokec7  \strokec8 Restaurant\strokec9 (\strokec10 db\strokec9 .\strokec10 Model\strokec9 ):\strokec7 \
+\
+    __tablename__ \strokec6 =\strokec7  \strokec9 "\strokec10 restaurants\strokec9 "\strokec7 \
+    \strokec11 id\strokec7  \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  \strokec12 primary_key\strokec6 =\strokec13 True\strokec9 ,\strokec7  \strokec12 autoincrement\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    name \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 ,\strokec7  \strokec12 nullable\strokec6 =\strokec13 False\strokec9 ,\strokec7  \strokec12 unique\strokec6 =\strokec13 True\strokec9 )\strokec7 \
+    description \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Text\strokec9 )\strokec7 \
+    planet \strokec6 =\strokec7  db\strokec9 .\strokec7 Column\strokec9 (\strokec7 db\strokec9 .\strokec7 Integer\strokec9 ,\strokec7  db\strokec9 .\strokec7 ForeignKey\strokec9 ('\strokec10 planets.id\strokec9 '))\strokec7 \
+\
+    db\strokec9 .\strokec7 relationship\strokec9 ('\strokec10 Planet\strokec9 ')
+\f3 \cf7 \cb1 \strokec7 \
+}
