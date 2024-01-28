@@ -1,0 +1,30 @@
+/* h1 {
+    font-size: 5rem;
+    margin: auto;
+    color: white;
+}
+
+h2 {
+    font-size: 3rem;
+    margin: auto;
+    color: grey;
+}
+
+.letter {
+    transition: color 1000ms;
+}
+
+body {
+    display: flex;
+    background-image: url(https://images.wallpaperscraft.com/image/single/stars_shine_space_211004_2560x1440.jpg);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.invert-button {
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+} */
+

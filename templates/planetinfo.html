@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>StarSail Travel Agency</title>
+  </head>
+  <body>
+  <h1>Visit {{planet.name}}</h1>
+    <div class="container">
+        <h1>{{planet_name}}</h1>
+        <p>
+            <h3>Distance From Sun: {{planet.distance_from_sun}} Astronomical Units</h3><br>
+            <h4>Gravity: {{gravity}}</h4><br>
+            <h4>Average Temperature: {{average_temp}} K ({{temp_in_far}}&deg;F)
+        </p>
+        <p>
+            <h3>Hotels:</h3>
+        </p>
+        <ul>
+            {% for hotel in hotels %}
+            <li>{{hotel.name}}</li>
+                <p>{{hotel.description}}</p>
+            {% endfor %}
+        </ul>
+        <p>
+            <h3>Activities:</h3>
+        </p>
+        <ul>
+            {% for activity in activities %}
+            <li>{{activity.name}}</li>
+                <p>{{activity.description}}</p>
+            {% endfor %}
+        </ul>
+        <p>
+            <h3>Restaurants:</h3>
+        </p>
+        <ul>
+            {% for restaurant in restaurants %}
+            <li>{{restaurant.name}}</li>
+                <p>{{restaurant.description}}</p>
+            {% endfor %}
+        </ul>
+        <a href="/booktravel">Book Your Trip To {{planet.name}}!</a>
+    </div>
+  </body>
+</html>
