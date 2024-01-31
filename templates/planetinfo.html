@@ -12,42 +12,59 @@
     <title>StarSail Travel Agency</title>
   </head>
   <body>
-  <h1>Visit {{planet.name}}</h1>
-    <div class="container">
-        <h1>{{planet_name}}</h1>
-        <p>
-            <h3>Distance From Sun: {{planet.distance_from_sun}} Astronomical Units</h3><br>
-            <h4>Gravity: {{gravity}}</h4><br>
-            <h4>Average Temperature: {{average_temp}} K ({{temp_in_far}}&deg;F)
-        </p>
-        <p>
-            <h3>Hotels:</h3>
-        </p>
-        <ul>
-            {% for hotel in hotels %}
-            <li>{{hotel.name}}</li>
-                <p>{{hotel.description}}</p>
-            {% endfor %}
-        </ul>
-        <p>
-            <h3>Activities:</h3>
-        </p>
-        <ul>
-            {% for activity in activities %}
-            <li>{{activity.name}}</li>
-                <p>{{activity.description}}</p>
-            {% endfor %}
-        </ul>
-        <p>
-            <h3>Restaurants:</h3>
-        </p>
-        <ul>
-            {% for restaurant in restaurants %}
-            <li>{{restaurant.name}}</li>
-                <p>{{restaurant.description}}</p>
-            {% endfor %}
-        </ul>
-        <a href="/booktravel">Book Your Trip To {{planet.name}}!</a>
-    </div>
+    
+    <div class="bg-image" style="background-image: url('/static/images/voyagemap.png');">
+        <nav class="navbar navbar-expand">
+            <div class="container-fluid">
+              <ul class="nav navbar-nav navbar-left navbar-dark">
+                {% if not g.user %}
+                <li><a href="/register" class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init>Register</a></li>
+                <li><a href="/login" class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init>Log in</a></li>
+                {% else %}
+                <li>
+                  <a href="/users/{{ g.user.id }}">
+                    <img src="{{ g.user.image_url }}" alt="{{ g.user.username }}" width="50" height="50" class="rounded-circle"/>
+                  </a>
+                </li>
+                <li><a href="/logout" class="btn btn-outline-light btn-md m-2" data-mdb-ripple-init>Log out</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+        <div class="container d-flex align-items-center justify-content-center text-center">
+          <div class="text-white" data-mdb-theme="dark">
+             <h1 class="text-white">Visit {{planet.name}}</h1></div>
+        <div class="container text-white align-items-center text-center" style="border: 2px solid #ffffff; padding: 20px; margin: 30px; border-radius: 10px; background-color: rgba(0, 0, 0, 0.75);">
+            <p>
+                <h3>Distance From Sun: {{planet.distance_from_sun}} Astronomical Units</h3><br>
+                <h5>Gravity: {{gravity}} m/s²</h5><br>
+                <h5>Average Temperature: {{average_temp}} K ({{temp_in_far}}&deg;F)</h5>
+            </p>
+            <p>
+                <h3 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">Hotels</h3>
+            </p>
+                {% for hotel in hotels %}
+                <h4>{{hotel.name}}</h4>
+                    <p>{{hotel.description}}</p>
+                {% endfor %}
+            <p>
+                <h3 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">Activities</h3>
+            </p>
+                {% for activity in activities %}
+                <h4>{{activity.name}}</h4>
+                    <p>{{activity.description}}</p>
+                {% endfor %}
+            <p>
+                <h3 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">Restaurants</h3>
+            </p>
+                {% for restaurant in restaurants %}
+                <h4>{{restaurant.name}}</h4>
+                    <p>{{restaurant.description}}</p>
+                {% endfor %}
+            <a class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init href="/booktravel" role="button">Book Your Trip To {{planet.name}}</a>
+            <a class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init href="/voyagemap" role="button">Back to Voyage Map</a>
+            </div>
+          </div>
+        </div>
   </body>
 </html>

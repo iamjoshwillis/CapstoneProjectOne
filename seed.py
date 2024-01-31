@@ -3,7 +3,7 @@ from app import db, app
 
 db.create_all()
 
-#Fill Planet DONE
+#Fill Planet
 mercury = Planet(name="Mercury", distance_from_sun="0.4")
 venus = Planet(name="Venus", distance_from_sun="0.7")
 earth = Planet(name="Earth", distance_from_sun="1")
@@ -49,7 +49,7 @@ great_dark_spot_skydiving = Activity(name="Skydiving in the Great Dark Spot", de
 infrared_therapy = Activity(name="Infrared Spa Therapy", description="Red light and infrared therapy is a relatively new hidden gem. Planet 9's high volume of infrared light will give you brand new skin.", planet=9)
 black_hole_experience = Activity(name="Black Hole Experience", description="We've perfectly captured a safe region within a nearby black hole that allows visitors to have the experience of seeing sped up time on the outside and an oddly pleasant increase in gravity.", planet=9)
 
-#Fill Hotel DONE
+#Fill Hotel
 hermes_palace = Hotel(name="Hermes' Palace", description="Luxury Resort that contains an oasis of rivers and natural waterslides in a quarter-mile-wide ultraglass dome", planet=1)
 hotel_caloris = Hotel(name="Hotel Caloris", description="Beautiful, modern resort that overlooks the Caloris Basin of Mercury", planet=1)
 
@@ -80,26 +80,16 @@ dark_origin_resort = Hotel(name="Dark Origin Resort", description="Planet 9's pr
 
 #Fill Airport
 mercurius = Airport(name="Mercurius Interplanetary Airport", planet=1)
-
 ishtar = Airport(name="Ishtar Terra Airport", planet=2)
-
 world_of_water = Airport(name="World of Water Interplanetary Airport", planet=3)
-
 olympus_mons = Airport(name="Olympus Mons Interplanetary Airport", planet=4)
-
 king_airport = Airport(name="The King of Planets Airport", planet=5)
-
 saturni = Airport(name="Saturni Interplanetary", planet=6)
-
 ouranos = Airport(name="Airport of Ouranos", planet=7)
-
 god_of_the_sea = Airport(name="God of the Sea Interplanetary Airport", planet=8)
-
 airport_nine = Airport(name="Interplanetary Airport 9", planet=9)
 
-
-
-#Fill Restaurant DONE
+#Fill Restaurant
 mercurmeals = Restaurant(name="MercurMeals", description="The oddly suspicious silver arches resemble an iconic logo that most humans are familiar with on Earth. The food is strangeley similar, as well.", planet=1)
 graphite_steakhouse = Restaurant(name="Graphite Steakhouse", description="The culinary artform of graphite searing is something Mercury has mastered at this fine dining establishment.", planet=1)
 
@@ -127,8 +117,11 @@ dark_spot_grill = Restaurant(name="Great Dark Spot Grill", description="If you a
 dark_matter_tavern = Restaurant(name="Dark Matter Tavern", description="Lit only by red light from this planet's mysterious photons, this tavern is the perfect spot to hide away and eat questionable entrees.", planet=9)
 chipotle = Restaurant(name="Chipotle Mexican Grill", description="Just when you thought that Chipotle couldn't impress you any more, they outdid themselves by opening a location on a -375 degree F planet with an unknown form of gravity. You're going to want to add that extra guacamole.", planet=9)
 
+db.session.add_all([mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, planetnine])
 
-db.session.add_all([mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, planetnine, mercurmeals, graphite_steakhouse, hyeholde, mcdonalds, green_martian_grill, gas_giant_grill, sky_father, hexagonal_clouds, brewhouse_of_the_rings, cyan_cafe, dark_nebula, oceanus, dark_matter_tavern, chipotle, graphite_skiiing, sulfur_sauna, tesserae_hiking, solar_hang_gliding, mineral_baking, glacier_hiking, sailing_the_caribbean, scuba, dune_riding, desert_high_jump, red_dust_delicacies, dark_spot_grill, red_sand_spa, parasailing, aurora_tour, ring_surfing, ptolemys_observatory, lazy_jet_stream, hermes_palace, hotel_caloris, flying_goddess, ultradark, natural_cryotherapy, diamond_bergs, deprivation_spa, meteor_zip_lining, great_dark_spot_skydiving, infrared_therapy, black_hole_experience, mercurius, ishtar, world_of_water, olympus_mons, king_airport, saturni, ouranos, god_of_the_sea, airport_nine, volcanic_steakhouse, the_greenhouse])
+db.session.commit()
+
+db.session.add_all([mercurmeals, graphite_steakhouse, hyeholde, mcdonalds, green_martian_grill, gas_giant_grill, sky_father, hexagonal_clouds, brewhouse_of_the_rings, cyan_cafe, dark_nebula, oceanus, dark_matter_tavern, chipotle, graphite_skiiing, sulfur_sauna, tesserae_hiking, solar_hang_gliding, mineral_baking, glacier_hiking, sailing_the_caribbean, scuba, dune_riding, desert_high_jump, red_dust_delicacies, dark_spot_grill, red_sand_spa, parasailing, aurora_tour, ring_surfing, ptolemys_observatory, lazy_jet_stream, hermes_palace, hotel_caloris, flying_goddess, ultradark, natural_cryotherapy, diamond_bergs, deprivation_spa, meteor_zip_lining, great_dark_spot_skydiving, infrared_therapy, black_hole_experience, mercurius, ishtar, world_of_water, olympus_mons, king_airport, saturni, ouranos, god_of_the_sea, airport_nine, volcanic_steakhouse, the_greenhouse, hotel_hamar, jade_mountain, inn_of_the_god_of_war, red_resort, great_red_spot_resort, cyclone_hotel, treasure_cove, ring_view_resort, white_gold, auroral_clouds, neptunes_trident, galileo, hotel_nine, dark_origin_resort])
 
 db.session.commit()
 

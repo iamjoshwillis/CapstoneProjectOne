@@ -19,6 +19,8 @@ class User(db.Model):
     image_url = db.Column(db.Text, default="/static/images/defaultuser.jpg")
     bio = db.Column(db.Text)
 
+    home_planet_name = db.relationship('Planet', foreign_keys=[home_planet])
+
     @classmethod
     def signup(cls, username, email, password, home_planet, image_url):
         hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
@@ -69,10 +71,14 @@ class Flight(db.Model):
     __tablename__ = "flights"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    departing_planet = db.Column(db.Integer, nullable=False)
-    arriving_planet = db.Column(db.Integer, nullable=False)
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    departing_planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'), nullable=False)
+    arriving_planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'), nullable=False)
     flight_time = db.Column(db.Float)
 
+    arriving_planet = db.relationship('Planet', foreign_keys=[arriving_planet_id])
+    departing_planet = db.relationship('Planet', foreign_keys=[departing_planet_id])
+    user_onflight = db.relationship('User', foreign_keys=[user])
 
 class Activity(db.Model):
 
@@ -101,8 +107,6 @@ class Restaurant(db.Model):
     name = db.Column(db.Text, nullable=False, unique=True)
     description = db.Column(db.Text)
     planet = db.Column(db.Integer, db.ForeignKey('planets.id'))
-
-
 
 
 def connect_db(app):

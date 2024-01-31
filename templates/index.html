@@ -12,12 +12,19 @@
     <title>StarSail Travel Agency</title>
   </head>
 <body>
-    <h1>S T A R  S A I L</h1>
-    <h2>Interplanetary Vacations Made Easy</h2>
-    <ul>
-        <li><a href="/register">Create an Account</a></li>
-        <li><a href="/login">Log in</a></li>
-        <li><a href="/voyagemap">Browse Vacations</a></li>
-    </ul>
+  <div class="bg-image" style="background-image: url('/static/images/voyagemap.png'); height:100vh;">
+      <div class="container d-flex align-items-center justify-content-center text-center h-100">
+        <div class="text-white" data-mdb-theme="dark">
+          <h1 class="mb-3">S T A R S A I L</h1>
+          <h5 class="mb-4">Interplanetary Vacations Made Easy</h5>
+          <a class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init href="/register" role="button">Register</a>
+          <a class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init href="/login" role="button">Login</a>
+          <a class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init href="/voyagemap" role="button">Explore the Voyage Map</a>
+          {% for category, message in get_flashed_messages(with_categories=True) %}
+            <div class="alert alert-{{ category }} text-danger">{{ message }}</div>
+            {% endfor %}
+        </div>
+      </div>
+  </div>
 </body>
 </html>

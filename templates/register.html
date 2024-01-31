@@ -12,21 +12,31 @@
     <title>StarSail Travel Agency</title>
   </head>
 <body>
-    <h1>CREATE A STARSAIL ACCOUNT</h1>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {% for field in form
-            if field.widget.input_type != 'hidden' %}
-        <p>
-            <div class="form-group">
-                {{field.label}}
-                {{field}}
+
+    <div class="bg-image" style="background-image: url('/static/images/voyagemap.png'); height:100vh;">
+      <div class="container d-flex align-items-center justify-content-center text-center h-100">
+        <div class="text-white" data-mdb-theme="dark">
+          <h1 class="mb-3">CREATE A STARSAIL ACCOUNT</h1>
+          <form method="POST">
+            {{ form.hidden_tag() }}
+            {% for field in form
+                if field.widget.input_type != 'hidden' %}
+            <p>
+                <div class="form-group">
+                    {{field.label}}
+                    {{field(class="form-control")}}
+                </div>
+            </p>
+            {% endfor %}
+            {% for category, message in get_flashed_messages(with_categories=True) %}
+            <div class="alert alert-{{ category }} text-danger">{{ message }}</div>
+            {% endfor %}
+            <button class="btn btn-outline-light btn-lg m-2">Submit</button>
+            <a href="/" class="btn btn-outline-light btn-lg m-2">Cancel</a>
             </div>
-        </p>
-        {% endfor %}
-        <button>Submit</button>
-        <a href="/">Cancel</a>
+        </form>
         </div>
-    </form>
+      </div>
+  </div>
 </body>
 </html>

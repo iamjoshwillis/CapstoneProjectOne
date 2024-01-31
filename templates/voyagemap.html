@@ -12,13 +12,50 @@
     <title>StarSail Travel Agency</title>
   </head>
   <body>
-  <h1>Plan Your Interplanetary Getaway</h1>
-    <div class="container">
-        <p>
+    <div
+      class="bg-image"
+      style="
+        background-image: url('/static/images/voyagemap.png');
+        height: 100vh;
+      "
+    >
+    <nav class="navbar navbar-expand">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left navbar-dark">
+          {% if not g.user %}
+          <li><a href="/register" class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init>Register</a></li>
+          <li><a href="/login" class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init>Log in</a></li>
+          {% else %}
+          <li>
+            <a href="/users/{{ g.user.id }}">
+              <img src="{{ g.user.image_url }}" alt="{{ g.user.username }}" width="50" height="50" class="rounded-circle"/>
+            </a>
+          </li>
+          <li><a href="/logout" class="btn btn-outline-light btn-md m-2" data-mdb-ripple-init>Log out</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+      <div
+        class="container d-flex align-items-center justify-content-center text-center h-100"
+      >
+        <div class="text-white" data-mdb-theme="dark">
+          <h1 class="text-white">Plan Your Interplanetary Getaway</h1>
+        </div>
+        <div class="h-100 d-flex align-items-center justify-content-center">
+          <p>
             {% for planet in planets %}
-            <a href="/planetinfo/{{planet.id}}">{{planet.name}}</a><br>
+            <a
+              class="btn btn-outline-light btn-lg m-2"
+              data-mdb-ripple-init
+              href="/planetinfo/{{planet.id}}"
+              role="button"
+              >{{planet.name}}</a
+            >
             {% endfor %}
-        </p>
+          </p>
+        </div>
+      </div>
     </div>
   </body>
 </html>

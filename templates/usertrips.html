@@ -12,28 +12,31 @@
     <title>StarSail Travel Agency</title>
   </head>
 <body>
-    <div class="bg-image" style="background-image: url('/static/images/voyagemap.png'); height:100vh;">
+    <div class="bg-image" style="background-image: url('/static/images/voyagemap.png'); height:100vh; background-size: cover;">
       <div class="container d-flex align-items-center justify-content-center text-center h-100">
         <div class="text-white" data-mdb-theme="dark">
-          <h1 class="mb-3">WELCOME BACK</h1>
-          <form method="POST">
-            {{ form.hidden_tag() }}
-            {% for field in form
-                if field.widget.input_type != 'hidden' %}
-            <p>
-                <div class="form-group">
-                    {{field.label}}
-                    {{field(class="form-control")}}
-                </div>
-            </p>
-            {% endfor %}
-            {% for category, message in get_flashed_messages(with_categories=True) %}
-           <div class="alert alert-{{ category }} text-danger">{{ message }}</div>
-            {% endfor %}
+          <h1 class="mb-3">Your Vacations</h1>
+            <table>
+                    <tr>
+                        <th>Departing Planet</th>
+                        <th>Arriving Planet</th>
+                        <th>Flight Time</th>
+                    </tr>
+                {% for flight in flights %}
+                    <tr>
+                        <td>flight.departing_planet_name</td>
+                    </tr>
+                    <tr>
+                        <td>flight.arriving_planet_name</td>
+                    </tr>
+                    <tr>
+                        <td>flight.flight_time</td>
+                    </tr>
+                {% endfor %}
+            </table>
             <button class="btn btn-outline-light btn-lg m-2">Login</button>
             <a href="/" class="btn btn-outline-light btn-lg m-2" >Cancel</a>
             </div>
-        </form>
         </div>
       </div>
   </div>

@@ -87,43 +87,16 @@ def login():
         flash("Failed Login Attempt")
     return render_template('login.html', form=form)
 
+@app.route('/logout')
+def logout():
+    do_logout()
+    flash("Goodbye", 'success')
+    return redirect("/")
 
 @app.route('/voyagemap', methods=["GET", "POST"])
 def show_voyage_map():
     planets = Planet.query.all()
     return render_template('voyagemap.html', planets=planets)
-
-@app.route('/booktravel', methods=["GET", "POST"])
-def show_flight_form():
-    form = BookTravelForm()
-    
-    departing_planet = (db.session.query(Planet.id, Planet.name).all())
-    choices = [(x.id, x.name) for x in departing_planet]
-    form.departing_planet.choices = choices
-
-    arriving_planet = (db.session.query(Planet.id, Planet.name).all())
-    choices = [(x.id, x.name) for x in arriving_planet]
-    form.arriving_planet.choices = choices
-
-    if form.validate_on_submit():
-        new_flight = Flight(
-            departing_planet=form.departing_planet.data,
-            arriving_planet=form.arriving_planet.data,
-            flight_time=1.5
-            )
-        db.session.add(new_flight)
-        db.session.commit()
-        return redirect('/tripconfirmation')
-    else:
-        return render_template('booktravel.html', form=form)
-
-
-@app.route("/trip/<int:id>", methods=["GET", "POST"])
-def show_itinerary(id):
-    trip = Flight.query.get_or_404(id)
-
-    return render_template('tripconfirmation.html', trip=trip)
-
 
 @app.route("/planetinfo/<int:planet_id>")
 def show_planet_info(planet_id):
@@ -134,8 +107,9 @@ def show_planet_info(planet_id):
     planet_name = planet.name
 
     """Gather Planetary Data""" 
-    response = requests.get(f'https://api.le-systeme-solaire.net/rest/bodies/{planet_name}')
+    response = requests.get(f'{SSO_BASE_URL}{planet_name}')
 
+    """Handle Planet 9 not having data in API"""
     if planet.id < 9:
         gravity = response.json()['gravity']
         average_temp = response.json()['avgTemp']
@@ -156,4 +130,113 @@ def show_planet_info(planet_id):
     gravity=gravity,
     average_temp=average_temp,
     temp_in_far=rounded_temperature)
+
+
+@app.route('/booktravel', methods=["GET", "POST"])
+def show_flight_form():
+
+    if not g.user:
+        flash("Please Register or Login", "danger")
+        return redirect("/")
     
+    form = BookTravelForm(departing_planet_id=g.user.home_planet)
+    departing_planet_id = (db.session.query(Planet.id, Planet.name).all())
+    choices = [(x.id, x.name) for x in departing_planet_id]
+    form.departing_planet_id.choices = choices
+
+    arriving_planet_id = (db.session.query(Planet.id, Planet.name).all())
+    choices = [(x.id, x.name) for x in arriving_planet_id]
+    form.arriving_planet_id.choices = choices
+
+    """Calculate Flight Time Based on user-chosen departing and arriving planets"""
+
+
+    if form.validate_on_submit():
+        new_flight = Flight(
+            user = g.user.id,
+            departing_planet_id=form.departing_planet_id.data,
+            arriving_planet_id=form.arriving_planet_id.data,
+            flight_time=1.5
+            )
+        db.session.add(new_flight)
+        db.session.commit()
+        return redirect(f'/trip/{new_flight.id}')
+    else:
+        return render_template('booktravel.html', form=form)
+
+
+@app.route("/trip/<int:id>", methods=["GET"])
+def show_itinerary(id):
+    flight = Flight.query.get_or_404(id)
+    arriving_planet_name = flight.arriving_planet.name
+    
+    activities = db.session.query(Activity.name, Activity.description).filter(Activity.planet == flight.arriving_planet_id).all()
+    hotels = db.session.query(Hotel.name, Hotel.description).filter(Hotel.planet == flight.arriving_planet_id).all()
+    restaurants = db.session.query(Restaurant.name, Restaurant.description).filter(Restaurant.planet == flight.arriving_planet_id).all()
+    planet_name = flight.arriving_planet.name
+
+    """Gather Planetary Data""" 
+    response = requests.get(f'{SSO_BASE_URL}{planet_name}')
+
+    """Handle Planet 9 not having data in API"""
+    if flight.arriving_planet_id < 9:
+        gravity = response.json()['gravity']
+        average_temp = response.json()['avgTemp']
+    else:
+        gravity = "Unknown"
+        average_temp = 47
+
+    """Convert Temp in K to F"""
+    temp_in_far = ((average_temp * 9)/5)-460
+    rounded_temperature = round(temp_in_far)
+
+    return render_template('tripconfirmation.html',
+    flight=flight, 
+    arriving_planet_name=arriving_planet_name,
+    planet_name=planet_name,
+    activities=activities,
+    hotels=hotels,
+    restaurants=restaurants,
+    gravity=gravity,
+    average_temp=average_temp,
+    temp_in_far=rounded_temperature)
+
+
+
+
+@app.route("/users/<int:user_id>")
+def show_profile(user_id):
+    user = User.query.get_or_404(user_id)
+
+    return render_template("profile.html", user=user)
+
+
+
+@app.route("/edit", methods=["GET", "POST"])
+def show_editform():
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+    
+    user = g.user
+    form = UserEditForm(obj=user)
+
+    planets = (db.session.query(Planet.id, Planet.name).all())
+    choices = [(x.id, x.name) for x in planets]
+    form.home_planet.choices = choices
+
+    if form.validate_on_submit():
+        if User.authenticate(user.username, form.password.data):
+            user.username = form.username.data
+            user.email = form.email.data
+            user.image_url = form.image_url.data or "static/images/defaultuser.jpg"
+            user.bio = form.bio.data
+            user.home_planet = form.home_planet.data
+
+            db.session.commit()
+            return redirect(f'/users/{user.id}')
+        
+        flash("Wrong password, please try again.", 'danger')
+        
+    return render_template("editform.html", form=form, user_id=user.id)
