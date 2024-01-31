@@ -74,7 +74,7 @@ class Flight(db.Model):
     user = db.Column(db.Integer, db.ForeignKey('users.id'))
     departing_planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'), nullable=False)
     arriving_planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'), nullable=False)
-    flight_time = db.Column(db.Float)
+    flight_time = db.Column(db.Text)
 
     arriving_planet = db.relationship('Planet', foreign_keys=[arriving_planet_id])
     departing_planet = db.relationship('Planet', foreign_keys=[departing_planet_id])

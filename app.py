@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, flash, request, session, g
+from flask import Flask, redirect, render_template, flash, session, g
 import requests
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -47,6 +47,7 @@ def show_home_page():
 
 @app.route('/register', methods=["GET", "POST"])
 def add_new_user():
+    """New User Registration"""
     form = UserSignUpForm()
 
     planets = (db.session.query(Planet.id, Planet.name).all())
@@ -72,7 +73,7 @@ def add_new_user():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-
+    """Existing User Login"""
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -97,6 +98,7 @@ def show_voyage_map():
 
 @app.route("/planetinfo/<int:planet_id>")
 def show_planet_info(planet_id):
+    """Gather Data for Selected Planet"""
     planet = Planet.query.get_or_404(planet_id)
     activities = db.session.query(Activity.name, Activity.description).filter(Activity.planet == planet_id).all()
     hotels = db.session.query(Hotel.name, Hotel.description).filter(Hotel.planet == planet_id).all()
@@ -149,7 +151,6 @@ def show_flight_form():
 
         """Calculate Flight Time Based on user-chosen departing and arriving planets"""
         departing_query = db.session.query(Planet.distance_from_sun).filter(Planet.id == form.departing_planet_id.data).first()
-
         arriving_query = db.session.query(Planet.distance_from_sun).filter(Planet.id == form.arriving_planet_id.data).first()
 
         departing = departing_query[0]
@@ -157,11 +158,18 @@ def show_flight_form():
 
         flight_time = round((abs(departing-arriving)/3.6), 1)
 
+        def convert_flight_time(flight_time):
+            hours = int(flight_time)
+            minutes = int((flight_time - hours) * 60)
+            return f'{hours} Hr {minutes} Min'
+        
+        flight_time_formatted = convert_flight_time(flight_time)
+
         new_flight = Flight(
             user = g.user.id,
             departing_planet_id=form.departing_planet_id.data,
             arriving_planet_id=form.arriving_planet_id.data,
-            flight_time=flight_time
+            flight_time=flight_time_formatted
             )
         db.session.add(new_flight)
         db.session.commit()
@@ -172,6 +180,7 @@ def show_flight_form():
 
 @app.route("/trip/<int:id>", methods=["GET"])
 def show_itinerary(id):
+    """Show Trip Details"""
     flight = Flight.query.get_or_404(id)
     arriving_planet_name = flight.arriving_planet.name
     
@@ -219,7 +228,7 @@ def show_profile(user_id):
 
 @app.route("/edit", methods=["GET", "POST"])
 def show_editform():
-
+    """Edit User Profile"""
     if not g.user:
         flash("Access unauthorized.", "danger")
         return redirect("/")

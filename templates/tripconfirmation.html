@@ -16,30 +16,30 @@
       <div class="container d-flex align-items-center justify-content-center text-center">
       <div class="container text-white align-items-center text-center" style="border: 2px solid #ffffff; padding: 20px; margin: 30px; border-radius: 10px; background-color: rgba(0, 0, 0, 0.75);">
   <h1>Pack Your Bags and Put On Your Spacesuit!</h1>
-    <h3>You're Going to {{arriving_planet_name}}</h3>
-    <h3>Flight Time: {{flight.flight_time}} Hours</h3>
-    <div class="container align-items-center text-center text-white"
+    <h3 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">You're Going to {{arriving_planet_name}}</h3>
+    <h4 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">Flight Time: {{flight.flight_time}}</h4>
+    <div class="container align-items-center text-center text-white">
       <p>
-          <h5>Gravity: {{gravity}} m/s²</h5><br>
+          <h5>Gravity: {{gravity}} m/s²</h5>
           <h5>Average Temperature: {{average_temp}} K ({{temp_in_far}}&deg;F)</h5>
       </p>
       <p>
-          <h2 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">Hotels</h2>
+          <h2 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">HOTELS</h2>
       </p>
           {% for hotel in hotels %}
-          <h4>{{hotel.name}}</h4>
+          <h4 style="color: grey">{{hotel.name}}</h4>
               <p>{{hotel.description}}</p>
           {% endfor %}
-          <h2 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">Activities</h2>
+          <h2 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">ACTIVITIES</h2>
           {% for activity in activities %}
-          <h4>{{activity.name}}</h4>
-              <p>{{activity.description}}</p>
+          <h4 style="color: grey">{{activity.name}}</h4>
+              <p >{{activity.description}}</p>
           {% endfor %}
       <p>
-          <h2 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">Restaurants</h2>
+          <h2 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">RESTAURANTS</h2>
       </p>
           {% for restaurant in restaurants %}
-          <h4>{{restaurant.name}}</h4>
+          <h4 style="color: grey">{{restaurant.name}}</h4>
               <p>{{restaurant.description}}</p>
           {% endfor %}
       </div>

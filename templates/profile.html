@@ -30,11 +30,11 @@
               </ul>
             </div>
           </nav>
-      <div class="container d-flex align-items-center justify-content-center text-center h-100">
-        <div class="text-white" data-mdb-theme="dark" style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">
+      <div class="container d-flex align-items-center justify-content-center text-center">
+        <div class="text-white" data-mdb-theme="dark" style="border: 2px solid #ffffff; padding: 20px; margin: 30px; border-radius: 10px; background-color: rgba(0, 0, 0, 0.75);">
             <div class="container">
                 <img src="{{ user.image_url }}" alt="{{ user.username }}" width="150" height="150" class="rounded-circle"/>
-                <h1 class="mb-3">{{ user.username }}</h1>
+                <h1 class="mb-3" style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">{{ user.username }}</h1>
                 <h3>{{user.email}}</h3>
                 <h3>Home Planet: {{user.home_planet_name.name}}</h3>
                 <h4>Bio: {{user.bio}}</h4>

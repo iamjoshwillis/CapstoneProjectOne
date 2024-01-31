@@ -14,9 +14,9 @@
 <body>
 
     <div class="bg-image" style="background-image: url('/static/images/voyagemap.png'); height:100vh;">
-      <div class="container d-flex align-items-center justify-content-center text-center h-100">
-        <div class="text-white" data-mdb-theme="dark">
-          <h1 class="mb-3">EDIT YOUR PROFILE</h1>
+      <div class="container d-flex align-items-center justify-content-center text-center">
+        <div class="text-white" data-mdb-theme="dark" style="border: 2px solid #ffffff; padding: 20px; margin: 30px; border-radius: 10px; background-color: rgba(0, 0, 0, 0.75);">
+          <h1 class="mb-3" style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">EDIT YOUR PROFILE</h1>
           <form method="POST">
             {{ form.hidden_tag() }}
             {% for field in form
