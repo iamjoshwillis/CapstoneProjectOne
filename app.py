@@ -148,15 +148,23 @@ def show_flight_form():
     choices = [(x.id, x.name) for x in arriving_planet_id]
     form.arriving_planet_id.choices = choices
 
-    """Calculate Flight Time Based on user-chosen departing and arriving planets"""
-
-
     if form.validate_on_submit():
+
+        """Calculate Flight Time Based on user-chosen departing and arriving planets"""
+        departing_query = db.session.query(Planet.distance_from_sun).filter(Planet.id == form.departing_planet_id.data).first()
+
+        arriving_query = db.session.query(Planet.distance_from_sun).filter(Planet.id == form.arriving_planet_id.data).first()
+
+        departing = departing_query[0]
+        arriving = arriving_query[0]
+
+        flight_time = round((abs(departing-arriving)/3.6), 1)
+
         new_flight = Flight(
             user = g.user.id,
             departing_planet_id=form.departing_planet_id.data,
             arriving_planet_id=form.arriving_planet_id.data,
-            flight_time=1.5
+            flight_time=flight_time
             )
         db.session.add(new_flight)
         db.session.commit()

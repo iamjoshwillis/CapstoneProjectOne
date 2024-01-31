@@ -28,7 +28,7 @@
             </p>
             {% endfor %}
             {% for category, message in get_flashed_messages(with_categories=True) %}
-           <div class="alert alert-{{ category }} text-danger">{{ message }}</div>
+            <div class="alert alert-{{ category }} text-danger">{{ message }}</div>
             {% endfor %}
             <button class="btn btn-outline-light btn-lg m-2">Login</button>
             <a href="/" class="btn btn-outline-light btn-lg m-2" >Cancel</a>
