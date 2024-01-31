@@ -14,9 +14,6 @@ app.config['SQLALCHEMY_ECHO'] = True
 """Base URL for Solar System OpenData API"""
 SSO_BASE_URL = "https://api.le-systeme-solaire.net/rest/bodies/"
 
-"""Base URL for NASA Images and Videos Gallery"""
-NASA_BASE_URL = "https://images-api.nasa.gov"
-
 connect_db(app)
 db.create_all()
 
