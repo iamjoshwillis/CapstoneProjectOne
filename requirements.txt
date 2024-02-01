@@ -5,6 +5,7 @@ charset-normalizer==3.3.2
 click==8.1.7
 dnspython==2.3.0
 Flask==2.2.5
+Flask-Bcrypt==0.7.1
 Flask-DebugToolbar==0.14.1
 flask-sqlalchemy==3.0.5
 greenlet==3.0.3
