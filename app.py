@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, redirect, render_template, flash, session, g
 import requests
 from flask_debugtoolbar import DebugToolbarExtension
@@ -7,7 +9,8 @@ from forms import *
 CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///space-vacations'
+app.config['SQLALCHEMY_DATABASE_URI'] = (os.environ.get('DATABASE_URL', 'postgresql:///space-vacations'))
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
@@ -17,7 +20,7 @@ SSO_BASE_URL = "https://api.le-systeme-solaire.net/rest/bodies/"
 connect_db(app)
 db.create_all()
 
-app.config['SECRET_KEY'] = "13572468"
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "135246")
 
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)

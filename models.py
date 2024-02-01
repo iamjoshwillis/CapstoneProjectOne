@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
@@ -111,6 +109,5 @@ class Restaurant(db.Model):
 
 def connect_db(app):
     """Connect to database."""
-    app.app_context().push()
     db.app = app
     db.init_app(app)
