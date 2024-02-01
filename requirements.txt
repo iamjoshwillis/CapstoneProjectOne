@@ -7,7 +7,7 @@ dnspython==2.3.0
 Flask==1.0.2
 Flask-Bcrypt==0.7.1
 Flask-DebugToolbar==0.14.1
-flask-sqlalchemy==3.0.5
+flask-sqlalchemy==2.3.2
 gunicorn==21.2.0
 idna==3.6
 importlib-metadata==6.7.0
