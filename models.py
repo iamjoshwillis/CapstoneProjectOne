@@ -20,7 +20,7 @@ class User(db.Model):
     home_planet_name = db.relationship('Planet', foreign_keys=[home_planet])
 
     @classmethod
-    def signup(cls, username, email, password, home_planet, image_url):
+    def signup(cls, username, email, password, home_planet, image_url, bio):
         hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
 
         user = User(
@@ -29,6 +29,7 @@ class User(db.Model):
             password=hashed_pwd,
             home_planet=home_planet,
             image_url=image_url,
+            bio=bio
         )
 
         db.session.add(user)

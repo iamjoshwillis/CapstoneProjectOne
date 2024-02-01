@@ -63,8 +63,8 @@ def add_new_user():
             email=form.email.data,
             password=form.password.data,
             image_url=form.image_url.data or User.image_url.default.arg,
+            bio=form.bio.data,
             home_planet=form.home_planet.data,
-            bio=form.bio.data
         )
         db.session.add(user)
         db.session.commit()
