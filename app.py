@@ -224,9 +224,11 @@ def show_itinerary(id):
 
 @app.route("/users/<int:user_id>")
 def show_profile(user_id):
+    """Show User Profile and Trip History"""
     user = User.query.get_or_404(user_id)
+    user_flights = user.flights
 
-    return render_template("profile.html", user=user)
+    return render_template("profile.html", user=user, user_flights=user_flights)
 
 
 

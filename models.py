@@ -18,6 +18,7 @@ class User(db.Model):
     bio = db.Column(db.Text)
 
     home_planet_name = db.relationship('Planet', foreign_keys=[home_planet])
+    flights = db.relationship('Flight', backref="users")
 
     @classmethod
     def signup(cls, username, email, password, home_planet, image_url, bio):
@@ -77,7 +78,6 @@ class Flight(db.Model):
 
     arriving_planet = db.relationship('Planet', foreign_keys=[arriving_planet_id])
     departing_planet = db.relationship('Planet', foreign_keys=[departing_planet_id])
-    user_onflight = db.relationship('User', foreign_keys=[user])
 
 class Activity(db.Model):
 

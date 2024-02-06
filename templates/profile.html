@@ -12,7 +12,7 @@
     <title>StarSail Travel Agency</title>
   </head>
 <body>
-    <div class="bg-image" style="background-image: url('/static/images/voyagemap.png'); height:100vh;">
+    <div class="bg-image" style="background-image: url('/static/images/voyagemap.png');">
         <nav class="navbar navbar-expand">
             <div class="container-fluid">
               <ul class="nav navbar-nav navbar-left navbar-dark">
@@ -37,7 +37,23 @@
                 <h1 class="mb-3" style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">{{ user.username }}</h1>
                 <h3>{{user.email}}</h3>
                 <h3>Home Planet: {{user.home_planet_name.name}}</h3>
-                <h4>Bio: {{user.bio}}</h4>
+                <h4>Bio: {{user.bio}}</h4><br>
+                <h4 style="text-shadow: 0 0 20px rgba(195, 0, 255, 1);">TRIP HISTORY</h4>
+                <table class="table">
+                  <tr class="text-white">
+                    <th>Departing Planet</th>
+                    <th>Arriving Planet</th>
+                    <th>Flight Time</th>
+                  </tr>
+                  {% for flight in user_flights %}
+                  <tr class="text-white">
+                    <td>{{ flight.departing_planet.name }}</td>
+                    <td>{{ flight.arriving_planet.name }}</td>
+                    <td>{{ flight.flight_time }}</td>
+                  </tr>
+                  {% endfor %}
+                </tr>
+                </table>
             </div>
             <a href="/edit" class="btn btn-outline-light btn-lg m-2" >Edit</a>
             <a href="/voyagemap" class="btn btn-outline-light btn-lg m-2" >Back to Voyage Map</a>

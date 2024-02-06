@@ -18,17 +18,19 @@
         height: 100vh;">
     <nav class="navbar navbar-expand">
       <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-left navbar-dark">
+        <ul class="nav navbar-nav ml-auto navbar-right navbar-dark">
           {% if not g.user %}
           <li><a href="/register" class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init>Register</a></li>
           <li><a href="/login" class="btn btn-outline-light btn-lg m-2" data-mdb-ripple-init>Log in</a></li>
           {% else %}
+          <li class="btn text-white btn-md m-2">Welcome, {{g.user.username}} of {{g.user.home_planet_name.name}}</li>
+          <li><a href="/users/{{ g.user.id }}" class="btn btn-outline-light btn-md m-2" data-mdb-ripple-init>My Trips</a></li>
+          <li><a href="/logout" class="btn btn-outline-light btn-md m-2" data-mdb-ripple-init>Log out</a></li>
           <li>
             <a href="/users/{{ g.user.id }}">
               <img src="{{ g.user.image_url }}" alt="{{ g.user.username }}" width="50" height="50" class="rounded-circle"/>
             </a>
           </li>
-          <li><a href="/logout" class="btn btn-outline-light btn-md m-2" data-mdb-ripple-init>Log out</a></li>
           {% endif %}
         </ul>
       </div>
